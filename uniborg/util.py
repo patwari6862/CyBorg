@@ -1,4 +1,5 @@
 from telethon import events
+from sample_config import Config
 from cyborg.util import is_read as ir
 from cyborg.util import progress as pg
 from cyborg.util import humanbytes as hb
