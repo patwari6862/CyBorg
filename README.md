@@ -65,11 +65,10 @@ directory, with some utilities, enhancements, the `_core` plugin, and the `_inli
 ## design
 
 The modular design of the project enhances your Telegram experience
-through [![plugins](https://telegra.ph/file/ef4a90e6e0fac46a39a1d.jpg)](https://github.com/Total-Noob-69/uniborg/tree/master/stdplugins "Plugins")
-which you can enable or disable on demand.
+through `PLUGINS` which you can enable or disable on demand.
 
 Each plugin gets the `borg`, `logger`, `Config`, `tgbot` magical
-[variables](https://github.com/spechide/UniBorg/blob/488eff632e65103ba7017d4f52777d22ddd52ea2/uniborg/uniborg.py#L76-L80)
+[variables](https://github.com/Total-Noob-69/UniBorg/blob/488eff632e65103ba7017d4f52777d22ddd52ea2/uniborg/uniborg.py#L76-L80)
 to ease their use. Thus creating a plugin as easy as adding
 a new file under the plugin directory to do the job:
 
@@ -85,7 +84,7 @@ async def handler(event):
 
 ## learning
 
-Check out the already-mentioned [plugins](https://github.com/SpEcHiDe/UniBorg/tree/master/stdplugins) directory, or some third-party [plugins](https://telegram.dog/UniBorg) to learn how to write your own, and consider reading [Telethon's documentation](http://telethon.readthedocs.io/).
+Check out the already-mentioned [plugins](https://github.com/Total-Noob-69/UniBorg/tree/master/stdplugins) directory, or some third-party [plugins](https://telegram.dog/UniBorg) to learn how to write your own, and consider reading [Telethon's documentation](http://telethon.readthedocs.io/).
 
 
 ## credits
