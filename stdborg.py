@@ -6,8 +6,7 @@ import logging
 import os
 import sys
 from pathlib import Path
-from uniborg import Uniborg
-from uniborg.storage import Storage
+from uniborg import Cyborg
 from telethon.sessions import StringSession
 
 
@@ -37,7 +36,7 @@ if len(Config.SUDO_USERS) >= 0:
 if Config.HU_STRING_SESSION is not None:
     # for Running on Heroku
     session_name = str(Config.HU_STRING_SESSION)
-    borg = Uniborg(
+    borg = Cyborg(
         StringSession(session_name),
         n_plugin_path="stdplugins/",
         db_plugin_path="dbplugins/",
@@ -49,7 +48,7 @@ if Config.HU_STRING_SESSION is not None:
 elif len(sys.argv) == 2:
     # for running on GNU/Linux
     session_name = str(sys.argv[1])
-    borg = Uniborg(
+    borg = Cyborg(
         session_name,
         n_plugin_path="stdplugins/",
         db_plugin_path="dbplugins/",
