@@ -7,7 +7,7 @@ from cyborg.ubutil import humanbytes as hb
 from cyborg.ubutil import time_formatter as tf
 
 def admin_cmd(pattern=None, allow_sudo=True, outgoing=True, incoming=False, allow_edited_updates=False):
-    return ac(pattern)
+    return ac(pattern, allow_sudo, outgoing, incoming, allow_edited_updates)
 
 async def is_read(borg, entity, message, is_out=None):
     ir(borg, entity, message, is_out)
