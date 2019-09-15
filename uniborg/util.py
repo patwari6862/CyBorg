@@ -7,7 +7,7 @@ from cyborg.util import time_formatter as tf
 
 def admin_cmd(pattern=None, allow_sudo=True, outgoing=True, incoming=False, allow_edited_updates=False):
     pattern = Config.COMMAND_HAND_LER + pattern
-    events.NewMessage(r"{}".format(pattern), allow_sudo, outgoing, incoming, allow_edited_updates)
+    return events.NewMessage(r"{}".format(pattern), allow_sudo, outgoing, incoming, allow_edited_updates)
 
 async def is_read(borg, entity, message, is_out=None):
     ir(borg, entity, message, is_out)
