@@ -7,7 +7,7 @@ import json
 import random
 import re
 from telethon import events, errors, custom
-from cyborg.util import admin_cmd, humanbytes
+from cyborg.ubutil import admin_cmd, humanbytes
 
 
 @borg.on(admin_cmd(  # pylint:disable=E0602
