@@ -1,6 +1,4 @@
-# This Source Code Form is subject to the terms of the Mozilla Public
-# License, v. 2.0. If a copy of the MPL was not distributed with this
-# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+# Using ubutil currently bcoz im too lazy to make a new util
 
 import asyncio
 import traceback
@@ -12,7 +10,7 @@ from cyborg import ubutil
 DELETE_TIMEOUT = 5
 
 
-@borg.on(util.admin_cmd(pattern="load (?P<shortname>\w+)$"))  # pylint:disable=E0602
+@borg.on(ubutil.admin_cmd(pattern="load (?P<shortname>\w+)$"))  # pylint:disable=E0602
 async def load_reload(event):
     await event.delete()
     shortname = event.pattern_match["shortname"]
@@ -30,7 +28,7 @@ async def load_reload(event):
         await event.respond(f"Failed to (re)load plugin {shortname}: {e}")
 
 
-@borg.on(util.admin_cmd(pattern="(?:unload|remove) (?P<shortname>\w+)$"))  # pylint:disable=E0602
+@borg.on(ubutil.admin_cmd(pattern="(?:unload|remove) (?P<shortname>\w+)$"))  # pylint:disable=E0602
 async def remove(event):
     await event.delete()
     shortname = event.pattern_match["shortname"]
@@ -45,7 +43,7 @@ async def remove(event):
     await msg.delete()
 
 
-@borg.on(util.admin_cmd(pattern="send (?P<shortname>\w+)$"))  # pylint:disable=E0602
+@borg.on(ubutil.admin_cmd(pattern="send (?P<shortname>\w+)$"))  # pylint:disable=E0602
 async def send_plug_in(event):
     if event.fwd_from:
         return
@@ -67,7 +65,7 @@ async def send_plug_in(event):
     await event.delete()
 
 
-@borg.on(util.admin_cmd(pattern="install"))  # pylint:disable=E0602
+@borg.on(ubutil.admin_cmd(pattern="install"))  # pylint:disable=E0602
 async def install_plug_in(event):
     if event.fwd_from:
         return
