@@ -1,13 +1,13 @@
 from telethon import events
 from sample_config import Config
+from cyborg.util import admin_cmd as ac
 from cyborg.util import is_read as ir
 from cyborg.util import progress as pg
 from cyborg.util import humanbytes as hb
 from cyborg.util import time_formatter as tf
 
-def admin_cmd(pattern=None, outgoing=True):
-    pattern = Config.COMMAND_HAND_LER + pattern
-    return events.NewMessage(r"{}".format(pattern), outgoing)
+def admin_cmd(pattern=None, allow_sudo=True, outgoing=True, incoming=False, allow_edited_updates=False):
+    return ac(pattern, allow_sudo, outgoing, incoming, allow_edited_updates)
 
 async def is_read(borg, entity, message, is_out=None):
     ir(borg, entity, message, is_out)
