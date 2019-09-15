@@ -65,7 +65,7 @@ directory, with some utilities, enhancements, the `_core` plugin, and the `_inli
 ## design
 
 The modular design of the project enhances your Telegram experience
-through [![plugins](https://github.com/Total-Noob-69/uniborg/tree/master/stdplugins)](https://telegra.ph/file/ef4a90e6e0fac46a39a1d.jpg)
+through [![plugins](https://github.com/Total-Noob-69/uniborg/tree/master/stdplugins)](https://telegra.ph/file/ef4a90e6e0fac46a39a1d.jpg "Plugins")
 which you can enable or disable on demand.
 
 Each plugin gets the `borg`, `logger`, `Config`, `tgbot` magical
