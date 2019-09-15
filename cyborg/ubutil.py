@@ -51,6 +51,7 @@ def admin_cmd(pattern=None, allow_sudo=True, outgoing=True, incoming=False, allo
     if bool(allow_edited_updates):
         allow_edited_updates = args["allow_edited_updates"]
         del args["allow_edited_updates"]
+    args = list(f"{pattern} {allow_sudo} {outgoing} {incoming} {allow_edited_updates}")
 
     # check if the plugin should listen for outgoing 'messages'
     is_message_enabled = True
