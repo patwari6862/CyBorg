@@ -52,7 +52,7 @@ The core features offered by the custom `TelegramClient` live under the
 directory, with some utilities, enhancements, the `_core` plugin, and the `_inline_bot` plugin.
 
 
-## [@SpEcHlDe](https://telegram.dog/ThankTelegram)
+## [Mandatory Vars]
 
 - Only two of the environment variables are mandatory.
 - This is because of `telethon.errors.rpc_error_list.ApiIdPublishedFloodError`
@@ -65,7 +65,7 @@ directory, with some utilities, enhancements, the `_core` plugin, and the `_inli
 ## design
 
 The modular design of the project enhances your Telegram experience
-through [plugins](https://github.com/SpEcHiDe/uniborg/tree/master/stdplugins)
+through [![plugins](https://github.com/Total-Noob-69/uniborg/tree/master/stdplugins)](https://telegra.ph/file/ef4a90e6e0fac46a39a1d.jpg)
 which you can enable or disable on demand.
 
 Each plugin gets the `borg`, `logger`, `Config`, `tgbot` magical
