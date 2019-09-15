@@ -6,7 +6,7 @@ import logging
 import os
 import sys
 from pathlib import Path
-from cyborg.uniborg import Cyborg
+from cyborg.cyborg import Cyborg
 from telethon.sessions import StringSession
 
 
