@@ -19,7 +19,7 @@ else:
         from config import Development as Config
 
 
-def admin_cmd(pattern=None, allow_sudo=True, outgoing=True, incoming=False, allow_edited_updates=False):
+def admin_cmd(pattern=None, allow_sudo=True, outgoing=True, incoming=False, allow_edited_updates=False, **args):
 
     # get the pattern from the decorator
     if pattern is not None:
