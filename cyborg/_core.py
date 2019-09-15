@@ -6,7 +6,7 @@ import asyncio
 import traceback
 import os
 from datetime import datetime
-from cyborg import util
+from cyborg import ubutil
 
 
 DELETE_TIMEOUT = 5
