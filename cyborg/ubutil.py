@@ -47,11 +47,10 @@ def admin_cmd(pattern=None, allow_sudo=True, outgoing=True, incoming=False, allo
         chats = black_list_chats
 
     # check if the plugin should allow edited updates
-    allow_edited_updates = False
     if bool(allow_edited_updates):
         allow_edited_updates = args["allow_edited_updates"]
         del args["allow_edited_updates"]
-    args = list(f"{pattern} {allow_sudo} {outgoing} {incoming} {allow_edited_updates}")
+    args = list(f"{pattern} {outgoing} {incoming} {allow_edited_updates}")
 
     # check if the plugin should listen for outgoing 'messages'
     is_message_enabled = True
