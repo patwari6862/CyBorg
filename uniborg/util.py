@@ -4,8 +4,8 @@ from cyborg.util import progress as pg
 from cyborg.util import humanbytes as hb
 from cyborg.util import time_formatter as tf
 
-def admin_cmd(pattern=None, **args):
-    ac(pattern, args)
+def admin_cmd(pattern=None, allow_sudo=True, outgoing=True, incoming=False, blacklist_chats=True, allow_edited_updates=False):
+    ac(pattern, )
 
 async def is_read(borg, entity, message, is_out=None):
     ir(borg, entity, message, is_out)
