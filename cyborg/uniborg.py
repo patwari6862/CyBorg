@@ -15,7 +15,7 @@ from . import hacks
 from pymongo import MongoClient
 
 
-class Uniborg(TelegramClient):
+class Cyborg(TelegramClient):
     def __init__(
             self, session, *, n_plugin_path="plugins", db_plugin_path="plugins",
             bot_token=None, api_config=None, **kwargs):
