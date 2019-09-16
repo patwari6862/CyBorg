@@ -60,9 +60,9 @@ class Cyborg(TelegramClient):
         inline_bot_plugin = Path(__file__).parent / "_inline_bot.py"
         self.load_plugin_from_file(inline_bot_plugin)
 
-        import compat
+        import compat.uniborg
         import sys
-        sys.modules['uniborg'] = compat
+        sys.modules['uniborg'] = compat.uniborg
 
         for a_plugin_path in Path().glob(f"{self.n_plugin_path}/*.py"):
             self.load_plugin_from_file(a_plugin_path)
