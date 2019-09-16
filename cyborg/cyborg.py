@@ -31,7 +31,7 @@ class Cyborg(TelegramClient):
             "api_id": 6,
             "api_hash": "eb06d4abfb49dc3eeb1aeb98ae0f581e",
             "device_model": "GNU/Linux nonUI",
-            "app_version": "@UniBorg 2.0",
+            "app_version": "@CyBorg 2.0",
             "lang_code": "ml",
             **kwargs
         }
@@ -60,7 +60,7 @@ class Cyborg(TelegramClient):
         inline_bot_plugin = Path(__file__).parent / "_inline_bot.py"
         self.load_plugin_from_file(inline_bot_plugin)
 
-        import compat
+        from compat import ub_util
         import sys
         sys.modules['uniborg.util'] = compat.ub_util
 
