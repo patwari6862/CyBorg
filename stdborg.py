@@ -38,6 +38,7 @@ if Config.HU_STRING_SESSION is not None:
     session_name = str(Config.HU_STRING_SESSION)
     borg = Cyborg(
         StringSession(session_name),
+        paperplane="compat/paperplane",
         n_plugin_path="stdplugins/",
         db_plugin_path="dbplugins/",
         api_config=Config,
