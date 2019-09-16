@@ -17,11 +17,12 @@ from pymongo import MongoClient
 
 class Cyborg(TelegramClient):
     def __init__(
-            self, session, *, n_plugin_path="plugins", db_plugin_path="plugins",
+            self, session, *, paperplane="compat/paperplane" n_plugin_path="plugins", db_plugin_path="plugins",
             bot_token=None, api_config=None, **kwargs):
         self._name = "LoggedIn"
         self._logger = logging.getLogger("UniBorg")
         self._plugins = {}
+        self.paperplane
         self.n_plugin_path = n_plugin_path
         self.db_plugin_path = db_plugin_path
         self.config = api_config
@@ -66,7 +67,7 @@ class Cyborg(TelegramClient):
         sys.modules['uniborg'] = compat.uniborg
         sys.modules['userbot'] = compat.paperplane
         
-        for a_plugin_path in Path().glob("compat/paperplane/*.py"):
+        for a_plugin_path in Path().glob(f"{self.paperplane}/*.py"):
             self.load_plugin_from_file(a_plugin_path)
 
         for a_plugin_path in Path().glob(f"{self.n_plugin_path}/*.py"):
