@@ -8,6 +8,7 @@
 import os
 
 from sys import version_info
+from telethon import events
 from logging import basicConfig, getLogger, INFO, DEBUG
 from distutils.util import strtobool as sb
 
