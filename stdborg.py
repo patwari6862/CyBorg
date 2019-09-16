@@ -43,7 +43,7 @@ if Config.HU_STRING_SESSION is not None:
         api_config=Config,
         api_id=Config.APP_ID,
         api_hash=Config.API_HASH,
-        paperplane="compat/paperplane",
+        paperplane="compat/paperplane"
     )
     borg.run_until_disconnected()
 elif len(sys.argv) == 2:
@@ -57,7 +57,7 @@ elif len(sys.argv) == 2:
         api_config=Config,
         api_id=Config.APP_ID,
         api_hash=Config.API_HASH,
-        paperplane="compat/paperplane",
+        paperplane="compat/paperplane"
     )
     borg.run_until_disconnected()
 else:
