@@ -25,6 +25,7 @@ requests
 selenium
 speedtest-cli
 sqlalchemy
+python-dotenv
 telegraph
 urbandict
 wikipedia
