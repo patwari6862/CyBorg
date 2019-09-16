@@ -49,11 +49,11 @@ if CONFIG_CHECK:
     quit(1)
 
 # Telegram App KEY and HASH
-API_KEY = os.environ.get("API_KEY", None)
+APP_KEY = os.environ.get("APP_KEY", None)
 API_HASH = os.environ.get("API_HASH", None)
 
 # Userbot Session String
-STRING_SESSION = os.environ.get("STRING_SESSION", None)
+HU_STRING_SESSION = os.environ.get("HU_STRING_SESSION", None)
 
 # Logging channel/group configuration.
 BOTLOG_CHATID = int(os.environ.get("BOTLOG_CHATID", "0"))
