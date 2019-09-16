@@ -3,8 +3,3 @@
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 from .cyborg import *
-import compat.uniborg.util
-import sys
-sys.modules['uniborg.util'] = compat.uniborg.util
-# ...
-from uniborg.util import admin_cmd, is_read, progress, humanbytes, time_formatter
