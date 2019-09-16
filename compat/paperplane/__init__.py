@@ -15,7 +15,6 @@ import pylast
 from dotenv import load_dotenv
 from requests import get
 from telethon import TelegramClient
-from telethon.sessions import StringSession
 
 load_dotenv("config.env")
 
@@ -49,7 +48,7 @@ if CONFIG_CHECK:
     quit(1)
 
 # Telegram App KEY and HASH
-APP_KEY = os.environ.get("APP_KEY", None)
+APP_ID = os.environ.get("APP_ID", None)
 API_HASH = os.environ.get("API_HASH", None)
 
 # Userbot Session String
@@ -127,12 +126,6 @@ TEMP_DOWNLOAD_DIRECTORY = os.environ.get("TMP_DOWNLOAD_DIRECTORY",
                                          "./downloads")
 
 # 'bot' variable
-if STRING_SESSION:
-    # pylint: disable=invalid-name
-    bot = TelegramClient(StringSession(STRING_SESSION), API_KEY, API_HASH)
-else:
-    # pylint: disable=invalid-name
-    bot = TelegramClient("userbot", API_KEY, API_HASH)
 
 # Global Variables
 COUNT_MSG = 0
