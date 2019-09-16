@@ -53,6 +53,9 @@ class Cyborg(TelegramClient):
         self._event_builders = hacks.ReverseList()
 
         self.loop.run_until_complete(self._async_init(bot_token=bot_token))
+        
+        init_plugin = Path(__file__).parent / "__init__.py"
+        self.load_plugin_from_file(init_plugin)
 
         core_plugin = Path(__file__).parent / "_core.py"
         self.load_plugin_from_file(core_plugin)
