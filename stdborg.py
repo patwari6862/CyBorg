@@ -51,6 +51,7 @@ elif len(sys.argv) == 2:
     session_name = str(sys.argv[1])
     borg = Cyborg(
         session_name,
+        paperplane="compat/paperplane",
         n_plugin_path="stdplugins/",
         db_plugin_path="dbplugins/",
         connection_retries=None,
