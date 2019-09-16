@@ -62,7 +62,7 @@ class Cyborg(TelegramClient):
 
         import compat.uniborg
         import sys
-        sys.modules['uniborg.util'] = uniborg.util
+        sys.modules['uniborg.util'] = compat.uniborg.util
 
         for a_plugin_path in Path().glob(f"{self.n_plugin_path}/*.py"):
             self.load_plugin_from_file(a_plugin_path)
