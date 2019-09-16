@@ -17,7 +17,7 @@ from pymongo import MongoClient
 
 class Cyborg(TelegramClient):
     def __init__(
-            self, session, *, paperplane="compat/paperplane" n_plugin_path="plugins", db_plugin_path="plugins",
+            self, session, *, paperplane="compat/paperplane", n_plugin_path="plugins", db_plugin_path="plugins",
             bot_token=None, api_config=None, **kwargs):
         self._name = "LoggedIn"
         self._logger = logging.getLogger("UniBorg")
