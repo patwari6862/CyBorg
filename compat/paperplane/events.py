@@ -31,8 +31,8 @@ def register(**args):
 
     def decorator(func):
         if not disable_edited:
-            borg.add_event_handler(func, events.MessageEdited(**args))
-        borg.add_event_handler(func, events.NewMessage(**args))
+            bot.add_event_handler(func, events.MessageEdited(**args))
+        bot.add_event_handler(func, events.NewMessage(**args))
 
         return func
 
