@@ -5,11 +5,6 @@
 #
 """ Init file which loads all of the modules """
 from userbot import LOGS
-from pathlib import Path
-scriptPath = Path(__file__).absolute() # the absolute() is not strictly necessary
-srcPath = scriptPath.parent
-commonDirectory = srcPath.parent # this could have been shortened with scriptPath.parent.parent.parent
-dataPath = commonDirectory / 'dbplugins'
 
 
 def __list_all_modules():
@@ -17,7 +12,6 @@ def __list_all_modules():
     import glob
 
     mod_paths = glob.glob(dirname(__file__) + "/*.py")
-    mod_paths.append(glob.glob(dataPath + "/*.py"))
     all_modules = [
         basename(f)[:-3] for f in mod_paths
         if isfile(f) and f.endswith(".py") and not f.endswith("__init__.py")
