@@ -8,6 +8,7 @@
 
 from telethon import events
 import asyncio
+from stdplugins.unite import borgs
 from userbot import bot, BOTLOG, BOTLOG_CHATID
 from traceback import format_exc
 from time import gmtime, strftime
@@ -28,9 +29,16 @@ def register(**args):
 
     if "disable_edited" in args:
         del args['disable_edited']
-        return @bot.on(events.MessageEdited(**args))
-    else:
-        return @bot.on(events.NewMessage(**args))
+
+    def decorator(func):
+        if not disable_edited:
+            borgs.add_event_handler(func, events.MessageEdited(**args))
+        borgs.add_event_handler(func, events.NewMessage(**args))
+
+        return func
+
+    return decorator
+        
 
 
 def errors_handler(func):
