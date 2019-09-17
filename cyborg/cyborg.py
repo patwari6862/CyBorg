@@ -102,6 +102,9 @@ class Cyborg(TelegramClient):
     def load_plugin(self, shortname):
         self.load_plugin_from_file(f"{self.n_plugin_path}/{shortname}.py")
 
+    def db_load_plugin(self, shortname):
+        self.load_plugin_from_file(f"{self.db_plugin_path}/{shortname}.py")
+
     def load_plugin_from_file(self, path):
         path = Path(path)
         shortname = path.stem
@@ -133,6 +136,16 @@ class Cyborg(TelegramClient):
                 del self._event_builders[i]
 
         del self._plugins[shortname]
+        self._logger.info(f"Removed plugin {shortname}")
+
+    def db_remove_plugin(self, shortname):
+        name = self.db_plugin_path + f"/{shortname}.py
+
+        for i in reversed(range(len(self._event_builders))):
+            ev, cb = self._event_builders[i]
+            if cb.__module__ == name:
+                del self._event_builders[i]
+
         self._logger.info(f"Removed plugin {shortname}")
 
     def await_event(self, event_matcher, filter=None):
