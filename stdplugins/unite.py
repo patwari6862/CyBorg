@@ -1,2 +1,3 @@
 def borgs():
-    return borg
+    bot = borg
+    return bot
