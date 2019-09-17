@@ -28,6 +28,39 @@ async def load_reload(event):
         await event.respond(f"Failed to (re)load plugin {shortname}: {e}")
 
 
+@borg.on(util.admin_cmd(pattern="dbload (?P<shortname>\w+)$"))  # pylint:disable=E0602
+async def load_reload(event):
+    await event.delete()
+    shortname = event.pattern_match["shortname"]
+    try:
+        if shortname in borg._plugins:  # pylint:disable=E0602
+            borg.db_remove_plugin(shortname)  # pylint:disable=E0602
+        borg.db_load_plugin(shortname)  # pylint:disable=E0602
+        msg = await event.respond(f"Successfully (re)loaded plugin {shortname}")
+        await asyncio.sleep(DELETE_TIMEOUT)
+        await msg.delete()
+    except Exception as e:  # pylint:disable=C0103,W0703
+        trace_back = traceback.format_exc()
+        # pylint:disable=E0602
+        logger.warn(f"Failed to (re)load plugin {shortname}: {trace_back}")
+        await event.respond(f"Failed to (re)load plugin {shortname}: {e}")
+
+
+@borg.on(util.admin_cmd(pattern="(?:dbunload|dbremove) (?P<shortname>\w+)$"))  # pylint:disable=E0602
+async def remove(event):
+    await event.delete()
+    shortname = event.pattern_match["shortname"]
+    if shortname == "_core":
+        msg = await event.respond(f"Not removing {shortname}")
+    elif shortname in borg._plugins:  # pylint:disable=E0602
+        borg.db_remove_plugin(shortname)  # pylint:disable=E0602
+        msg = await event.respond(f"Removed plugin {shortname}")
+    else:
+        msg = await event.respond(f"Plugin {shortname} is not loaded")
+    await asyncio.sleep(DELETE_TIMEOUT)
+    await msg.delete()
+
+
 @borg.on(util.admin_cmd(pattern="(?:unload|remove) (?P<shortname>\w+)$"))  # pylint:disable=E0602
 async def remove(event):
     await event.delete()
