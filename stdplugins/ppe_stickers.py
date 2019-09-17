@@ -30,7 +30,6 @@ KANGING_STR = [
 
 
 @register(outgoing=True, pattern="^.kang")
-@errors_handler
 async def kang(args):
     """ For .kang command, kangs stickers or creates new ones. """
     if not args.text[0].isalpha() and args.text[0] not in ("/", "#", "@", "!"):
