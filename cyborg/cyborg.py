@@ -111,6 +111,7 @@ class Cyborg(TelegramClient):
         mod = importlib.util.module_from_spec(spec)
 
         mod.borg = self
+        mod.bot = self
         mod.logger = logging.getLogger(shortname)
         mod.mongo_client = self.mongo
         # declare Config and tgbot to be accessible by all modules
