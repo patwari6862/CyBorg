@@ -8,8 +8,7 @@ from userbot import LOGS
 from pathlib import Path
 scriptPath = Path(__file__).absolute() # the absolute() is not strictly necessary
 srcPath = scriptPath.parent
-appPath = srcPath.parent
-commonDirectory = appPath.parent # this could have been shortened with scriptPath.parent.parent.parent
+commonDirectory = srcPath.parent # this could have been shortened with scriptPath.parent.parent.parent
 dataPath = commonDirectory / 'dbplugins'
 
 
