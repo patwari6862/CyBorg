@@ -8,7 +8,7 @@
 
 from telethon import events
 import asyncio
-from userbot import bot, BOTLOG, BOTLOG_CHATID
+from userbot import BOTLOG, BOTLOG_CHATID
 from traceback import format_exc
 from time import gmtime, strftime
 import math
@@ -31,8 +31,8 @@ def register(**args):
 
     def decorator(func):
         if not disable_edited:
-            bot.add_event_handler(func, events.MessageEdited(**args))
-        bot.add_event_handler(func, events.NewMessage(**args))
+            borg.add_event_handler(func, events.MessageEdited(**args))
+        borg.add_event_handler(func, events.NewMessage(**args))
 
         return func
 
