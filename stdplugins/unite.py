@@ -1,4 +1,6 @@
+from telethon import events
+
+
 @borg.on
-def borgs():
+async def borgs():
     bot = borg
-    return bot
