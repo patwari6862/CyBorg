@@ -8,7 +8,7 @@ import os
 import time
 
 from telethon import events
-from sample_config import config
+from sample_config import Config
 from telethon.tl.functions.messages import GetPeerDialogsRequest
 
 # the secret configuration specific things
