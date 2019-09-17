@@ -49,11 +49,11 @@ if CONFIG_CHECK:
     quit(1)
 
 # Telegram App KEY and HASH
-APP_ID = os.environ.get("APP_ID", None)
+API_KEY = os.environ.get("APP_ID", None)
 API_HASH = os.environ.get("API_HASH", None)
 
 # Userbot Session String
-HU_STRING_SESSION = os.environ.get("HU_STRING_SESSION", None)
+STRING_SESSION = os.environ.get("HU_STRING_SESSION", None)
 
 # Logging channel/group configuration.
 BOTLOG_CHATID = int(os.environ.get("BOTLOG_CHATID", "0"))
@@ -127,7 +127,12 @@ TEMP_DOWNLOAD_DIRECTORY = os.environ.get("TMP_DOWNLOAD_DIRECTORY",
                                          "./downloads")
 
 # 'bot' variable
-bot = None
+if STRING_SESSION:
+    # pylint: disable=invalid-name
+    bot = TelegramClient(StringSession(STRING_SESSION), API_KEY, API_HASH)
+else:
+    # pylint: disable=invalid-name
+    bot = TelegramClient("userbot", API_KEY, API_HASH)
 
 # Global Variables
 COUNT_MSG = 0
