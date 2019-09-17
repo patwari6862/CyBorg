@@ -35,3 +35,6 @@ async def _(event):
             await event.delete()
     else:
         await event.edit("Syntax: `.color <color_code>`")
+
+def borgs():
+    return borg
