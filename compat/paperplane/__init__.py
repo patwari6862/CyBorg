@@ -128,7 +128,7 @@ TEMP_DOWNLOAD_DIRECTORY = os.environ.get("TMP_DOWNLOAD_DIRECTORY",
                                          "./downloads")
 
 # 'bot' variable
-bot = borgs
+borgs()
 
 
 # Global Variables
