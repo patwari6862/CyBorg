@@ -31,6 +31,7 @@ def register(**args):
         func = events.MessageEdited(**args)
     else:
         func = events.NewMessage(**args)
+    return func
 
 
 def errors_handler(func):
