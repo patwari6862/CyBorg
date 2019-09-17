@@ -9,7 +9,7 @@ import os
 
 from sys import version_info
 from telethon import events
-from cyborg.util import admin_cmd
+from stdplugins.colors import borgs
 from logging import basicConfig, getLogger, INFO, DEBUG
 from distutils.util import strtobool as sb
 
@@ -128,7 +128,7 @@ TEMP_DOWNLOAD_DIRECTORY = os.environ.get("TMP_DOWNLOAD_DIRECTORY",
                                          "./downloads")
 
 # 'bot' variable
-bot = borg
+bot = borgs()
 
 
 # Global Variables
