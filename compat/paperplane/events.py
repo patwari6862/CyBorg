@@ -8,7 +8,7 @@
 
 from telethon import events
 import asyncio
-from userbot import BOTLOG, BOTLOG_CHATID
+from userbot import bot, BOTLOG, BOTLOG_CHATID
 from traceback import format_exc
 from time import gmtime, strftime
 import math
