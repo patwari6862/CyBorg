@@ -37,7 +37,6 @@ def register(**args):
         return func
 
     return decorator
-        
 
 
 def errors_handler(func):
