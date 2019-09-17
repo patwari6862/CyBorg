@@ -139,7 +139,7 @@ class Cyborg(TelegramClient):
         self._logger.info(f"Removed plugin {shortname}")
 
     def db_remove_plugin(self, shortname):
-        name = self.db_plugin_path + f"/{shortname}.py
+        name = self.db_plugin_path + f"/{shortname}.py"
 
         for i in reversed(range(len(self._event_builders))):
             ev, cb = self._event_builders[i]
