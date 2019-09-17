@@ -28,9 +28,9 @@ def register(**args):
 
     if "disable_edited" in args:
         del args['disable_edited']
-        return events.MessageEdited(**args)
+        func = events.MessageEdited(**args)
     else:
-        return events.NewMessage(**args)
+        func = events.NewMessage(**args)
 
 
 def errors_handler(func):
