@@ -67,15 +67,15 @@ class Cyborg(TelegramClient):
         sys.modules['userbot'] = compat.paperplane
         sys.modules['userbot.bot'] = self
 
-        for a_plugin_path in Path().glob(f"compat/paperplane/*.py"):
-            self.load_plugin_from_file(a_plugin_path)
-
         for a_plugin_path in Path().glob(f"{self.n_plugin_path}/*.py"):
             self.load_plugin_from_file(a_plugin_path)
 
         if api_config.DB_URI is not None:
             for a_plugin_path in Path().glob(f"{self.db_plugin_path}/*.py"):
                 self.load_plugin_from_file(a_plugin_path)
+
+        for a_plugin_path in Path().glob(f"compat/paperplane/*.py"):
+            self.load_plugin_from_file(a_plugin_path)
 
         LOAD = self.config.LOAD
         NO_LOAD = self.config.NO_LOAD
