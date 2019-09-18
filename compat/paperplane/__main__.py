@@ -12,7 +12,7 @@ INVALID_PH = '\nERROR: The Phone No. entered is INVALID' \
              '\n Tip: Use Country Code along with number.' \
              '\n or check your phone number and try again !'
 
-async def test()
+async def test():
     try:
         bot.start()
     except PhoneNumberInvalidError:
