@@ -19,7 +19,7 @@ except PhoneNumberInvalidError:
     exit(1)
 
 for module_name in ALL_MODULES:
-    imported_module = import_module("userbot.modules." + module_name)
+    imported_module = import_module("stdplugins." + module_name)
 
 LOGS.info("Your userbot version is 4.0 - Extended")
 
