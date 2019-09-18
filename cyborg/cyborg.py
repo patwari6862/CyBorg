@@ -25,6 +25,7 @@ class Cyborg(TelegramClient):
         self.n_plugin_path = n_plugin_path
         self.db_plugin_path = db_plugin_path
         self.config = api_config
+        self.command = command
         self.mongo = MongoClient(os.environ.get("MONGO_URI",None))
 
         kwargs = {
@@ -118,6 +119,7 @@ class Cyborg(TelegramClient):
         mod.bot = self
         mod.logger = logging.getLogger(shortname)
         mod.mongo_client = self.mongo
+        mod.command = self.command
         # declare Config and tgbot to be accessible by all modules
         mod.Config = self.config
         if self.config.TG_BOT_USER_NAME_BF_HER is not None:
