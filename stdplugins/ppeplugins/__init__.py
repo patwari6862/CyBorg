@@ -4,6 +4,8 @@
 # you may not use this file except in compliance with the License.
 #
 """ Init file which loads all of the modules """
+import compat.paperplane
+sys.modules['userbot'] = compat.paperplane
 from userbot import LOGS
 
 
