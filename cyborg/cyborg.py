@@ -98,10 +98,6 @@ class Cyborg(TelegramClient):
 
     def load_plugin(self, shortname):
         self.load_plugin_from_file(f"{self.n_plugin_path}/{shortname}.py")
-    
-    def ppe_start(self, startdir):
-        self.load_plugin_from_file(f"compat/paperplane/__init__.py")
-        self.load_plugin_from_file(f"compat/paperplane/__main__.py")
 
     def db_load_plugin(self, shortname):
         self.load_plugin_from_file(f"{self.db_plugin_path}/{shortname}.py")
