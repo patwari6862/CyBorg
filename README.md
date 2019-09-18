@@ -35,6 +35,7 @@ class Development(Config):
   APP_ID = 6
   API_HASH = "eb06d4abfb49dc3eeb1aeb98ae0f581e"
   TG_BOT_TOKEN_BF_HER = ""
+  PPE_MODE = "False" # Set to "True" to activate PaperPlaneExtended. Leave "False" to activate CyBorg
   TG_BOT_USER_NAME_BF_HER = ""
   UB_BLACK_LIST_CHAT = []
   # chat ids or usernames, it is recommended to use chat ids,
