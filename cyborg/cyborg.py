@@ -61,11 +61,12 @@ class Cyborg(TelegramClient):
         self.load_plugin_from_file(inline_bot_plugin)
 
         import compat.uniborg
+        import stdplugins.ppeplugins
         import compat.paperplane
         import sys
         sys.modules['uniborg'] = compat.uniborg
         sys.modules['userbot'] = compat.paperplane
-        sys.modules['userbot.bot'] = self
+        sys.modules['userbot.modules'] = stdplugins.ppeplugins
 
         if str(self.config.PPE_MODE) == "True":
             for a_plugin_path in Path().glob(f"compat/paperplane/*.py"):
