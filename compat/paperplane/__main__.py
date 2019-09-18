@@ -13,7 +13,7 @@ INVALID_PH = '\nERROR: The Phone No. entered is INVALID' \
              '\n or check your phone number and try again !'
 
 try:
-    bot.start()
+    await bot.start()
 except PhoneNumberInvalidError:
     print(INVALID_PH)
     exit(1)
@@ -28,6 +28,6 @@ LOGS.info(
     "If you need assistance, head to https://t.me/PaperplaneExtendedChat")
 
 if len(argv) not in (1, 3, 4):
-    bot.disconnect()
+    await bot.disconnect()
 else:
-    bot.run_until_disconnected()
+    await bot.run_until_disconnected()
