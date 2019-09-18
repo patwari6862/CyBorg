@@ -151,7 +151,7 @@ class Cyborg(TelegramClient):
 
     def command(**args):
         """ Register a new event. """
-        pattern = agrs.get("pattern", None)
+        pattern = args.get("pattern", None)
         allow_sudo = args.get("allow_sudo", False)
 
         # get the pattern from the decorator
