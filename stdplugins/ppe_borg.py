@@ -12,13 +12,13 @@ if borg:
         try:
             await test()
             await event.delete
-        except NameError:
-            await event.edit("Borg is not loaded")
+        except Exception as e:
+            await event.edit(str(e))
 elif bot:
     @register(outgoing=True, pattern="^.borg")
     async def switch_borg(event):
         try:
             import stdborg
             await event.delete
-        except NameError:
-            await event.edit("Bot is not loaded")
+       except Exception as e:
+            await event.edit(str(e))
