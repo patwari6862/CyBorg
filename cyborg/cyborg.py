@@ -149,48 +149,45 @@ class Cyborg(TelegramClient):
 
         self._logger.info(f"Removed plugin {shortname}")
 
-    def command(**args, pattern=None):
+    def command(pattern=None, allow_sudo=False, outgoing=True, incoming=False, blacklist_chats=True, allow_edited_updates=False):
         """ Register a new event. """
-        allow_sudo = args.get("allow_sudo", False)
 
         # get the pattern from the decorator
         if pattern is not None:
             if pattern.startswith("\#"):
                 # special fix for snip.py
-                args["pattern"] = re.compile(pattern)
+                pattern = re.compile(pattern)
             else:
-                args["pattern"] = re.compile(self.config.COMMAND_HAND_LER + pattern)
+                pattern = re.compile(self.config.COMMAND_HAND_LER + pattern)
 
-        args["outgoing"] = True
+        outgoing = True
         # should this command be available for other users?
         if allow_sudo:
-            args["from_users"] = list(self.config.SUDO_USERS)
+            from_users = list(self.config.SUDO_USERS)
             # Mutually exclusive with outgoing (can only set one of either).
-            args["incoming"] = True
-            del args["allow_sudo"]
+            incoming = True
+            del allow_sudo
 
         # error handling condition check
-        elif "incoming" in args and not args["incoming"]:
-            args["outgoing"] = True
+        elif incoming == False:
+            outgoing = True
 
         # add blacklist chats, UB should not respond in these chats
-        args["blacklist_chats"] = True
+        blacklist_chats = True
         black_list_chats = list(self.config.UB_BLACK_LIST_CHAT)
         if len(black_list_chats) > 0:
-            args["chats"] = black_list_chats
+            chats = black_list_chats
 
         # check if the plugin should allow edited updates
-        allow_edited_updates = False
-        if "allow_edited_updates" in args and args["allow_edited_updates"]:
-            allow_edited_updates = args['allow_edited_updates']
-            del args['allow_edited_updates']
+        if allow_edited_updates == True:
+            del allow_edited_updates
 
         is_message_enabled = True
 
         def decorator(func):
-            if not disable_edited:
-                self.add_event_handler(func, events.MessageEdited(**args))
-            self.add_event_handler(func, events.NewMessage(**args))
+            if not allow_edited_updates:
+                self.add_event_handler(func, events.MessageEdited(pattern, allow_sudo, outgoing, incoming, chats))
+            self.add_event_handler(func, events.NewMessage(pattern, allow_sudo, outgoing, incoming, chats))
 
             return func
 
