@@ -20,5 +20,5 @@ elif bot:
         try:
             import stdborg
             await event.delete
-       except Exception as e:
+        except Exception as e:
             await event.edit(str(e))
