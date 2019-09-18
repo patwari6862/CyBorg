@@ -74,9 +74,6 @@ class Cyborg(TelegramClient):
             for a_plugin_path in Path().glob(f"{self.db_plugin_path}/*.py"):
                 self.load_plugin_from_file(a_plugin_path)
 
-        for a_plugin_path in Path().glob(f"compat/paperplane/*.py"):
-            self.load_plugin_from_file(a_plugin_path)
-
         LOAD = self.config.LOAD
         NO_LOAD = self.config.NO_LOAD
         if LOAD or NO_LOAD:
