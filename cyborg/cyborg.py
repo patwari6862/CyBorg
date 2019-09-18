@@ -149,7 +149,7 @@ class Cyborg(TelegramClient):
 
         self._logger.info(f"Removed plugin {shortname}")
 
-    def command(pattern=None, **args):
+    def command(pattern, **args):
         """ Register a new event. """
         allow_sudo = args.get("allow_sudo", False)
 
