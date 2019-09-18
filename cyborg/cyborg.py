@@ -118,7 +118,6 @@ class Cyborg(TelegramClient):
         mod.bot = self
         mod.logger = logging.getLogger(shortname)
         mod.mongo_client = self.mongo
-        mod.command = self.command
         # declare Config and tgbot to be accessible by all modules
         mod.Config = self.config
         if self.config.TG_BOT_USER_NAME_BF_HER is not None:
@@ -149,50 +148,6 @@ class Cyborg(TelegramClient):
                 del self._event_builders[i]
 
         self._logger.info(f"Removed plugin {shortname}")
-
-    def command(pattern=None, allow_sudo=False, outgoing=True, incoming=False, blacklist_chats=True, allow_edited_updates=False):
-        """ Register a new event. """
-
-        # get the pattern from the decorator
-        if pattern is not None:
-            if pattern.startswith("\#"):
-                # special fix for snip.py
-                pattern = re.compile(pattern)
-            else:
-                pattern = re.compile(self.config.COMMAND_HAND_LER + pattern)
-
-        outgoing = True
-        # should this command be available for other users?
-        if allow_sudo:
-            from_users = list(self.config.SUDO_USERS)
-            # Mutually exclusive with outgoing (can only set one of either).
-            incoming = True
-            del allow_sudo
-
-        # error handling condition check
-        elif incoming == False:
-            outgoing = True
-
-        # add blacklist chats, UB should not respond in these chats
-        blacklist_chats = True
-        black_list_chats = list(self.config.UB_BLACK_LIST_CHAT)
-        if len(black_list_chats) > 0:
-            chats = black_list_chats
-
-        # check if the plugin should allow edited updates
-        if allow_edited_updates == True:
-            del allow_edited_updates
-
-        is_message_enabled = True
-
-        def decorator(func):
-            if not allow_edited_updates:
-                self.add_event_handler(func, events.MessageEdited(pattern, allow_sudo, outgoing, incoming, chats))
-            self.add_event_handler(func, events.NewMessage(pattern, allow_sudo, outgoing, incoming, chats))
-
-            return func
-
-        return decorator
 
     def await_event(self, event_matcher, filter=None):
         fut = asyncio.Future()
