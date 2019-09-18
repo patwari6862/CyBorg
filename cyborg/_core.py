@@ -46,7 +46,7 @@ async def load_reload(event):
         await event.respond(f"Failed to (re)load plugin {shortname}: {e}")
 
 
-@borg.command(pattern="(?:dbunload|dbremove) (?P<shortname>\w+)$"))  # pylint:disable=E0602
+@borg.command(pattern="(?:dbunload|dbremove) (?P<shortname>\w+)$")  # pylint:disable=E0602
 async def remove(event):
     await event.delete()
     shortname = event.pattern_match["shortname"]
@@ -61,7 +61,7 @@ async def remove(event):
     await msg.delete()
 
 
-@borg.command(pattern="(?:unload|remove) (?P<shortname>\w+)$"))  # pylint:disable=E0602
+@borg.command(pattern="(?:unload|remove) (?P<shortname>\w+)$")  # pylint:disable=E0602
 async def remove(event):
     await event.delete()
     shortname = event.pattern_match["shortname"]
@@ -76,7 +76,7 @@ async def remove(event):
     await msg.delete()
 
 
-@borg.command(pattern="send (?P<shortname>\w+)$"))  # pylint:disable=E0602
+@borg.command(pattern="send (?P<shortname>\w+)$")  # pylint:disable=E0602
 async def send_plug_in(event):
     if event.fwd_from:
         return
@@ -98,7 +98,7 @@ async def send_plug_in(event):
     await event.delete()
 
 
-@borg.command(pattern="install"))  # pylint:disable=E0602
+@borg.command(pattern="install")  # pylint:disable=E0602
 async def install_plug_in(event):
     if event.fwd_from:
         return
