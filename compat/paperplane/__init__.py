@@ -95,7 +95,7 @@ YOUTUBE_API_KEY = Config.YOUTUBE_API_KEY
 ALIVE_NAME = os.environ.get("ALIVE_NAME", None)
 
 # Time & Date - Country and Time Zone
-COUNTRY = str(Config.TZ)
+COUNTRY = str(os.environ.get("TZ", None))
 
 TZ_NUMBER = int(os.environ.get("TZ_NUMBER", 1))
 
