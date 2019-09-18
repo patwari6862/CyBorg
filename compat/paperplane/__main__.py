@@ -5,7 +5,7 @@ from sys import argv
 
 from telethon.errors.rpcerrorlist import PhoneNumberInvalidError
 from userbot import LOGS, bot
-from stdplugins import ALL_MODULES
+from stdplugins.ppeplugins import ALL_MODULES
 
 
 INVALID_PH = '\nERROR: The Phone No. entered is INVALID' \
@@ -19,7 +19,7 @@ except PhoneNumberInvalidError:
     exit(1)
 
 for module_name in ALL_MODULES:
-    imported_module = import_module("stdplugins." + module_name)
+    imported_module = import_module("stdplugins.ppeplugins/" + module_name)
 
 LOGS.info("Your userbot version is 4.0 - Extended")
 
