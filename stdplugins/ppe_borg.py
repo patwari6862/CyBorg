@@ -14,7 +14,7 @@ if borg:
         except NameError:
             await event.edit("Borg is not loaded")
 elif bot:
-    @register(outgoing=True, pattern=^.borg)
+    @register(outgoing=True, pattern="^.borg")
     async def switch_borg(event):
         try:
             import stdborg
