@@ -7,7 +7,7 @@ from uniborg.util import admin_cmd
 
 if borg:
     @borg.on(admin_cmd(pattern="ppe"))
-    def test():
+    def test(event):
         try:
             import userbot.__main___
         except Exception as e:
