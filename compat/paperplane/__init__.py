@@ -12,6 +12,7 @@ from telethon.sessions import StringSession
 from logging import basicConfig, getLogger, INFO, DEBUG
 from distutils.util import strtobool as sb
 
+from sample_config import Config
 import pylast
 from dotenv import load_dotenv
 from requests import get
@@ -49,11 +50,11 @@ if CONFIG_CHECK:
     quit(1)
 
 # Telegram App KEY and HASH
-API_KEY = os.environ.get("APP_ID", None)
-API_HASH = os.environ.get("API_HASH", None)
+API_KEY = Config.APP_ID
+API_HASH = Config.API_HASH
 
 # Userbot Session String
-STRING_SESSION = os.environ.get("HU_STRING_SESSION", None)
+STRING_SESSION = Config.HU_STRING_SESSION
 
 # Logging channel/group configuration.
 BOTLOG_CHATID = int(os.environ.get("BOTLOG_CHATID", "0"))
@@ -73,14 +74,14 @@ DB_URI = os.environ.get("DATABASE_URL", None)
 OCR_SPACE_API_KEY = os.environ.get("OCR_SPACE_API_KEY", None)
 
 # remove.bg API key
-REM_BG_API_KEY = os.environ.get("REM_BG_API_KEY", None)
+REM_BG_API_KEY = Config.REM_BG_API_KEY
 
 # Chrome Driver and Headless Google Chrome Binaries
-CHROME_DRIVER = os.environ.get("CHROME_DRIVER", None)
-GOOGLE_CHROME_BIN = os.environ.get("GOOGLE_CHROME_BIN", None)
+CHROME_DRIVER = Config.CHROME_DRIVER
+GOOGLE_CHROME_BIN = Config.GOOGLE_CHROME_BIN
 
 # OpenWeatherMap API Key
-OPEN_WEATHER_MAP_APPID = os.environ.get("OPEN_WEATHER_MAP_APPID", None)
+OPEN_WEATHER_MAP_APPID = Config.OPEN_WEATHER_MAP_APPID
 
 # Anti Spambot Config
 ANTI_SPAMBOT = sb(os.environ.get("ANTI_SPAMBOT", "False"))
@@ -88,13 +89,13 @@ ANTI_SPAMBOT = sb(os.environ.get("ANTI_SPAMBOT", "False"))
 ANTI_SPAMBOT_SHOUT = sb(os.environ.get("ANTI_SPAMBOT_SHOUT", "False"))
 
 # Youtube API key
-YOUTUBE_API_KEY = os.environ.get("YOUTUBE_API_KEY", None)
+YOUTUBE_API_KEY = Config.YOUTUBE_API_KEY
 
 # Default .alive name
 ALIVE_NAME = os.environ.get("ALIVE_NAME", None)
 
 # Time & Date - Country and Time Zone
-COUNTRY = str(os.environ.get("COUNTRY", ""))
+COUNTRY = str(Config.TZ)
 
 TZ_NUMBER = int(os.environ.get("TZ_NUMBER", 1))
 
@@ -119,12 +120,11 @@ else:
     lastfm = None
 
 # Google Drive Module
-G_DRIVE_CLIENT_ID = os.environ.get("G_DRIVE_CLIENT_ID", None)
+G_DRIVE_CLIENT_ID = Config.G_DRIVE_CLIENT_ID
 G_DRIVE_CLIENT_SECRET = os.environ.get("G_DRIVE_CLIENT_SECRET", None)
-G_DRIVE_AUTH_TOKEN_DATA = os.environ.get("G_DRIVE_AUTH_TOKEN_DATA", None)
-GDRIVE_FOLDER_ID = os.environ.get("GDRIVE_FOLDER_ID", None)
-TEMP_DOWNLOAD_DIRECTORY = os.environ.get("TMP_DOWNLOAD_DIRECTORY",
-                                         "./downloads")
+G_DRIVE_AUTH_TOKEN_DATA = Config.AUTH_TOKEN_DATA
+GDRIVE_FOLDER_ID = Config.GDRIVE_FOLDER_ID
+TEMP_DOWNLOAD_DIRECTORY = Config.TMP_DOWNLOAD_DIRECTORY
 
 # 'bot' variable
 if STRING_SESSION:
