@@ -67,7 +67,7 @@ class Cyborg(TelegramClient):
         sys.modules['userbot'] = compat.paperplane
         sys.modules['userbot.bot'] = self
 
-        if bool(self.config.PPE_MODE):
+        if str(self.config.PPE_MODE) == "True":
             for a_plugin_path in Path().glob(f"compat/paperplane/*.py"):
                 self.load_plugin_from_file(a_plugin_path)
 
