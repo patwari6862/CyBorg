@@ -9,7 +9,7 @@ if borg:
     @borg.on(admin_cmd(pattern="ppe"))
     async def switch_ppe(event):
         try:
-            import userbot.__main__
+            borg.ppe_start("__main__")
             await event.delete
         except NameError:
             await event.edit("Borg is not loaded")
