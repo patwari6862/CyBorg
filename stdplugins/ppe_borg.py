@@ -3,13 +3,14 @@ try:
     from userbot.events import register
 except:
     pass
+from userbot.__main__ import test
 from uniborg.util import admin_cmd
 
 if borg:
     @borg.on(admin_cmd(pattern="ppe"))
     async def switch_ppe(event):
         try:
-            borg.ppe_start("__main__")
+            await test()
             await event.delete
         except NameError:
             await event.edit("Borg is not loaded")
