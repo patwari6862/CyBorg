@@ -3,7 +3,6 @@ try:
     from userbot.events import register
 except:
     pass
-from userbot.__main__ import test
 from uniborg.util import admin_cmd
 
 if borg:
