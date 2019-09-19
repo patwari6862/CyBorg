@@ -64,8 +64,6 @@ async def set_no_log_p_m(event):
             if not no_log_pms_sql.is_approved(chat.id):
                 no_log_pms_sql.approve(chat.id)
                 await event.edit("Won't Log Messages from [{}](tg://user?id={})".format(firstname, chat.id))
-                await asyncio.sleep(3)
-                await event.delete()
 
 
 @borg.on(admin_cmd(pattern="dellog ?(.*)"))
@@ -80,8 +78,6 @@ async def set_no_log_p_m(event):
             if no_log_pms_sql.is_approved(chat.id):
                 no_log_pms_sql.disapprove(chat.id)
                 await event.edit("Will Log Messages from [{}](tg://user?id={})".format(firstname, chat.id))
-                await asyncio.sleep(3)
-                await event.delete()
 
 
 @borg.on(admin_cmd(pattern="approve ?(.*)"))
@@ -103,8 +99,6 @@ async def approve_p_m(event):
                     del PREV_REPLY_MESSAGE[chat.id]
                 pmpermit_sql.approve(chat.id, reason)
                 await event.edit("Approved User [{}](tg://user?id={})".format(firstname, chat.id))
-                await asyncio.sleep(3)
-                await event.delete()
 
 
 @borg.on(admin_cmd(pattern="block ?(.*)"))
