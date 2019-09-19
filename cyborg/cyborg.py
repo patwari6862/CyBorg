@@ -25,7 +25,8 @@ class Cyborg(TelegramClient):
         self.n_plugin_path = n_plugin_path
         self.db_plugin_path = db_plugin_path
         self.config = api_config
-        self.mongo = MongoClient(os.environ.get("MONGO_URI",None))
+        if bool(os.environ.get("MONGO_URI", False)):
+            self.mongo = MongoClient(os.environ.get("MONGO_URI", None))
 
         kwargs = {
             "api_id": 6,
