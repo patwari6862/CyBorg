@@ -1,135 +1,107 @@
-"""
-Lydia AI plugin for userbot.
+"""Lydia AI plugin for @UniBorg
+.enacf <as a reply to user's message //Turns AI on For that user.
+.delcf <as a reply to user's message //Turns AI off For that user.
+.lstcf // Outputs List Of Currently added Users in AI Auto-Chat.
 Description: A module that Act as a chatbot and chat with a User/other Bot.
- 			This Module Needs CoffeeHouse API to work. so Join https://t.me/IntellivoidDev and send #activateapi and follow instructions.
-			This Module also Needs MongoDB For Storage of Some Data So make Sure you have that too.
-Usage: .cf <as a reply to user's message //Turns AI on For that user.
-	   .delcf <as a reply to user's message //Turns AI off For that user.			
-	   .listcf //Outputs List Of Currently added Users in AI Auto-Chat.
-Credits: @Zero_cool7870 (For Writing This Module)
-		 Zi Xing (For CoffeeHouse API)			
-"""
+This Module Needs CoffeeHouse API to work. so Join https://telegram.dog/IntellivoidDev and send #activateapi and follow instructions.
+This Module also Needs DB_URI For Storage of Some Data So make sure you have that too.
+Credits:
+@Hackintosh5 (for inspiring me to write this module)
+@Zero_cool7870 (For Writing The Original Module)
+Zi Xing (For CoffeeHouse API)"""
+
+
 import coffeehouse as cf
-from coffeehouse.exception import CoffeeHouseError
-from uniborg.util import admin_cmd
+
 import asyncio
-import logging
+import io
+from sql_helpers.lydia_ai_sql import get_s, get_all_s, add_s, remove_s
 from time import time
-from telethon import events
-logging.basicConfig(level=logging.INFO)
+from uniborg.util import admin_cmd
 
-if Config.MONGO_URI and Config.LYDIA_API is not None:
-	api_key = Config.LYDIA_API
-
-	# Initialise client
-	api_client = cf.API(api_key)
-	db = mongo_client['test']
-	lydia = db.lydia
+if Config.LYDIA_API is not None:
+    api_key = Config.LYDIA_API
+    # Initialise client
+    api_client = cf.API(api_key)
 
 
-@borg.on(admin_cmd(pattern="cf", allow_sudo=True))
-async def lydia_enable(event):
-	if event.fwd_from:
-		return
-	if Config.MONGO_URI and Config.LYDIA_API is None:
-		await event.edit("Make Sure You've added MONGO_URI and LYDIA_API env vars Correctly.")	
-		return		
-	if event.reply_to_msg_id == None:
-		await event.edit("Reply To A User's Message to Add him/her in Lydia Auto-Chat.")
-		return		 	
-	reply_msg = await event.get_reply_message()	
-	user_id = reply_msg.from_id
-	chat_id = event.chat_id
-	await event.edit("Processing...")
-	cursors = lydia.find({})
-	try:
-		for c in cursors:
-			if c['user_id'] == user_id and c['chat_id'] == chat_id:
-				await event.edit("User is already in Lydia Auto-Chat.")
-				return		
-	except:
-		pass						
-	session = api_client.create_session()
-	ses = {'id':session.id,'expires':session.expires}
-	logging.info(ses)
-	lydia.insert_one({'user_id':user_id,'chat_id':chat_id,'session':ses})
-	await event.edit("Lydia AI Turned On for User: "+str(user_id))
+@borg.on(admin_cmd(pattern="(ena|del|lst)cf", allow_sudo=True))
+async def lydia_disable_enable(event):
+    if event.fwd_from:
+        return
+    if Config.LYDIA_API is None:
+        await event.edit("please add required `LYDIA_API` env var")
+        return
+    if event.reply_to_msg_id is not None:
+        input_str = event.pattern_match.group(1)
+        reply_msg = await event.get_reply_message()
+        user_id = reply_msg.from_id
+        chat_id = event.chat_id
+        await event.edit("Processing...")
+        if input_str == "ena":
+            session = api_client.create_session()
+            logger.info(session)
+            logger.info(add_s(user_id, chat_id, session.id, session.expires))
+            await event.edit(f"Lydia AI turned on for [user](tg://user?id={user_id}) in chat: `{chat_id}`")
+        elif input_str == "del":
+            logger.info(remove_s(user_id, chat_id))
+            await event.edit(f"Lydia AI turned off for [user](tg://user?id={user_id}) in chat: `{chat_id}`")
+        elif input_str == "lst":
+            lsts = get_all_s()
+            if len(lsts) > 0:
+                output_str = "Lydia AI enabled users:\n\n"
+                for lydia_ai in lsts:
+                    output_str += f"[user](tg://user?id={lydia_ai.user_id}) in chat `{lydia_ai.chat_id}`\n"
+            else:
+                output_str = "no Lydia AI enabled users / chats. Start by replying `.enacf` to any user in any chat!"
+            if len(output_str) > Config.MAX_MESSAGE_SIZE_LIMIT:
+                with io.BytesIO(str.encode(output_str)) as out_file:
+                    out_file.name = "lydia_ai.text"
+                    await event.client.send_file(
+                        event.chat_id,
+                        out_file,
+                        force_document=True,
+                        allow_cache=False,
+                        caption="Lydia AI enabled users",
+                        reply_to=event
+                    )
+            else:
+                await event.edit(output_str)
+        else:
+            await event.edit("Reply To User Message to Add / Delete them from Lydia Auto-Chat.")
+    else:
+        await event.edit("Reply To A User's Message to Add / Delete them from Lydia Auto-Chat.")
 
-@borg.on(admin_cmd(pattern="delcf", allow_sudo=True))
-async def lydia_disable(event):
-	if event.fwd_from:
-		return
-	if Config.MONGO_URI and Config.LYDIA_API is None:
-		await event.edit("Make Sure You've added MONGO_URI and LYDIA_API env vars Correctly.")	
-		return		
-	if event.reply_to_msg_id == None:
-		await event.edit("Reply To A User's Message to Remove him/her from Lydia Auto-Chat.")
-		return	 		 
-	reply_msg = await event.get_reply_message()	
-	user_id = reply_msg.from_id
-	chat_id = event.chat_id
-	await event.edit("Processing...")
-	cursors = lydia.find({})
-	for c in cursors:
-		if c['user_id'] == user_id and c['chat_id'] == chat_id:
-			lydia.delete_one(c)
-	await event.edit("Lydia AI Turned OFF for User: "+str(user_id))			
 
-@borg.on(admin_cmd(pattern="listcf", allow_sudo=True))
-async def lydia_list(event):
-	if event.fwd_from:
-		return
-	if Config.MONGO_URI and Config.LYDIA_API is None:
-		await event.edit("Make Sure You've added MONGO_URI and LYDIA_API env vars Correctly.")	
-		return		
-	await event.edit("Processing...")
-	msg = "**Auto-Chat:**"
-	cur = lydia.find({})
-	for c in cur:
-		user_id = str(c['user_id'])
-		msg += "\n__User:__ [{}](tg://user?id={})".format(user_id,user_id)
-		msg += "\n__Chat:__ `{}`\n".format(str(c['chat_id']))	
-	await event.edit(msg)	
-	
-@borg.on(events.NewMessage(incoming=True))  
-async def Lydia_bot_update(event):
-	if event.fwd_from:
-		return
-	if Config.MONGO_URI and Config.LYDIA_API is None:
-		return		
-	if event.media == None:	
-		cursor = lydia.find({})
-		for c in cursor:
-			if c['user_id'] == event.from_id and c['chat_id'] == event.chat_id:
-				query = event.text
-				ses = c['session']
-	
-                # Check if the session is expired
-                # If this method throws an exception at this point, then there's an issue with the API, Auth or Server.
-				if ses['expires'] < time():
-					session = api_client.create_session()
-					ses = {'id': session.id, 'expires': session.expires}
-					logging.info(ses)
-					lydia.update_one(c,{'$set':{'user_id':event.from_id,'chat_id':event.chat_id,'session':ses}})			
-    
-                # Try to think a thought.            
-				try:
-					async with event.client.action(event.chat_id, "typing"):
-						await asyncio.sleep(1)
-						output = api_client.think_thought(ses['id'],query)
-						await event.reply(output)
-				except CoffeeHouseError as e:
-                    # CoffeeHouse related issue, session issue most likely.
-					logging.error(str(e))
-
-                    # Create a new session
-					session = api_client.create_session()
-					ses = {'id': session.id, 'expires': session.expires}
-					logging.info(ses)
-					lydia.update_one(c,{'$set':{'user_id':event.from_id,'chat_id':event.chat_id,'session':ses}})			
-	
-                    # Reply again, if this method fails then there's a other issue.
-					async with event.client.action(event.chat_id, "typing"):
-						await asyncio.sleep(1)
-						output = api_client.think_thought(ses['id'],query)
-						await event.reply(output)
+@borg.on(admin_cmd(incoming=True))
+async def on_new_message(event):
+    if event.chat_id in Config.UB_BLACK_LIST_CHAT:
+        return
+    if Config.LYDIA_API is None:
+        return
+    if not event.media:
+        user_id = event.from_id
+        chat_id = event.chat_id
+        s = get_s(user_id, chat_id)
+        if s is not None:
+            session_id = s.session_id
+            session_expires = s.session_expires
+            query = event.text
+            # Check if the session is expired
+            # If this method throws an exception at this point,
+            # then there's an issue with the API, Auth or Server.
+            if session_expires < time():
+                # re-generate session
+                session = api_client.create_session()
+                logger.info(session)
+                session_id = session.id
+                session_expires = session.expires
+                logger.info(add_s(user_id, chat_id, session_id, session_expires))
+            # Try to think a thought.
+            try:
+                async with event.client.action(event.chat_id, "typing"):
+                    await asyncio.sleep(1)
+                    output = api_client.think_thought(session_id, query)
+                    await event.reply(output)
+            except cf.exception.CoffeeHouseError as e:
+                logger.info(str(e))
