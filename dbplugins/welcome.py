@@ -1,8 +1,7 @@
 """Greetings
 Commands:
 .clearwelcome
-.setwelcome <Welcome Message>
-.listwelcome"""
+.savewelcome <Welcome Message>"""
 
 from telethon import events
 from telethon.utils import pack_bot_file_id
@@ -35,7 +34,7 @@ async def _(event):
             title = chat.title if chat.title else "this chat"
             participants = await event.client.get_participants(chat)
             count = len(participants)
-            mention = "[{}](tg://user?id={})".format(a_user.first_name, a_user.id)
+            mention = "{} (tg://user?id={})".format(a_user.first_name, a_user.id)
             first = a_user.first_name
             last = a_user.last_name
             if last:
@@ -45,7 +44,7 @@ async def _(event):
             username = f"@{a_user.username}" if a_user.username else mention
             userid = a_user.id
             current_saved_welcome_message = cws.custom_welcome_message
-            mention = "[{}](tg://user?id={})".format(a_user.first_name, a_user.id)
+            mention = "{} (tg://user?id={})".format(a_user.first_name, a_user.id)
             
             current_message = await event.reply(
                 current_saved_welcome_message.format(mention=mention, title=title, count=count, first=first, last=last, fullname=fullname, username=username, userid=userid),
@@ -54,7 +53,7 @@ async def _(event):
             update_previous_welcome(event.chat_id, current_message.id)
 
 
-@borg.on(admin_cmd("setwelcome"))  # pylint:disable=E0602
+@borg.on(admin_cmd("savewelcome"))  # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
         return
@@ -89,10 +88,9 @@ async def _(event):
     if hasattr(cws, 'custom_welcome_message'):
         await event.edit(
             "Welcome note found. " + \
-        "Your welcome message is `{}`.".format(cws.custom_welcome_message)
+        "Your welcome message is {}.".format(cws.custom_welcome_message)
     )
     else:
         await event.edit(
             "No Welcome Message found"
         )
-         
