@@ -222,8 +222,11 @@ async def on_new_chat_action_message(event):
 async def on_new_channel_message(event):
     if Config.PM_LOGGR_BOT_API_ID is None:
         return
-    if tgbot is None:
-        return
+    try:
+        if tgbot is None:
+            return
+    except Exception as e:
+        logger.info(str(e))
     # logger.info(event.stringify())
     if isinstance(event, types.UpdateChannel):
         channel_id = event.channel_id
