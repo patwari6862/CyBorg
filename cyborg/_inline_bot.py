@@ -79,8 +79,8 @@ if Config.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
         elif query.startswith("ytdl"):
             # input format should be ytdl URL
             p = re.compile("ytdl (.*)")
-            b = p.search(event.text)
-            ytdl_url = "https://www.google.com/url?q=" + b.group(1).strip()
+            r = p.search(event.text)
+            ytdl_url = "https://www.google.com/url?q=" + r.group(1).strip()
             if ytdl_url.startswith("http"):
                 command_to_exec = [
                     "youtube-dl",
