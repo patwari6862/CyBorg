@@ -107,7 +107,7 @@ if Config.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
                     # throw error
                     result = builder.article(
                         "YTDL Errors © @UniBorg",
-                        text=f"{error_message.replace("https://google.com/url?q=", "")} Powered by @UniBorg",
+                        text="{} Powered by @UniBorg".format(error_message.replace("https://google.com/url?q=", "")),
                         link_preview=False
                     )
                 elif t_response:
@@ -184,7 +184,7 @@ if Config.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
                         ])
                     result = builder.article(
                         "YouTube © @UniBorg",
-                        text=f"{ytdl_url.replace("https://google.com/url?q=", "")} powered by @UniBorg",
+                        text="{} powered by @UniBorg".format(ytdl_url.replace("https://google.com/url?q=", "")),
                         buttons=inline_keyboard,
                         link_preview=True
                     )
