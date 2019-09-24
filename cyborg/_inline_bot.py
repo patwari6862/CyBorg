@@ -61,6 +61,7 @@ async def _(event):
 
 # pylint:disable=E0602
 if Config.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
+    if Config.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
     @tgbot.on(events.InlineQuery)  # pylint:disable=E0602
     async def inline_handler(event):
         builder = event.builder
@@ -79,8 +80,8 @@ if Config.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
         elif query.startswith("ytdl"):
             # input format should be ytdl URL
             p = re.compile("ytdl (.*)")
-            r = p.search(event.text)
-            ytdl_url = "https://www.google.com/url?q=" + r.group(1).strip()
+            r = p.search(query)
+            ytdl_url = "https://google.com/url?q=" + r.group(1).strip()
             if ytdl_url.startswith("http"):
                 command_to_exec = [
                     "youtube-dl",
@@ -107,7 +108,7 @@ if Config.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
                     # throw error
                     result = builder.article(
                         "YTDL Errors © @UniBorg",
-                        text=f"{error_message} Powered by @UniBorg",
+                        text=f"{error_message.replace("https://google.com/url?q=", "")} Powered by @UniBorg",
                         link_preview=False
                     )
                 elif t_response:
@@ -184,7 +185,7 @@ if Config.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
                         ])
                     result = builder.article(
                         "YouTube © @UniBorg",
-                        text="{} powered by @UniBorg".format(ytdl_url.replace("https://www.google.com/url?q=", "")),
+                        text=f"{ytdl_url.replace("https://google.com/url?q=", "")} powered by @UniBorg",
                         buttons=inline_keyboard,
                         link_preview=True
                     )
