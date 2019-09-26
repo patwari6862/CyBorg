@@ -90,7 +90,7 @@ async def un_gmute_user(event):
         muted.delete_one({'user_id':user_id})
         await event.edit(f"Alright,I am giving [{firstname}](tg://user?id={user_id}) a second chance __globally__")
         logging.info("Un-Gmuted {}".format(str(user_id)))
-        log_msg = f"Gmuted [{firstname}](tg://user?id={user_id})\nID: {user_id}\nGroup Chat: {event.chat_id}"
+        log_msg = f"Un-Gmuted [{firstname}](tg://user?id={user_id})\nID: {user_id}\nGroup Chat: {event.chat_id}"
         if Config.PRIVATE_GROUP_BOT_API_ID is not None:
             await borg.send_message(
                   Config.PRIVATE_GROUP_BOT_API_ID,
