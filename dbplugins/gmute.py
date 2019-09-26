@@ -51,12 +51,18 @@ async def gmute_user(event):
                     await event.edit("`User is Already G-Muted.`")
                     return
             if user_id == borg.me.id:
-                    await event.edit("`Cant Mute Myself..`")
-                    return
+                await event.edit("`Cant Mute Myself..`")
+                return
             else:
                 muted.insert_one({'user_id':user_id})
                 await event.edit(f"Damn! [{firstname}](tg://user?id={user_id})\nYou talk too much.G-moot for you (ノಠ益ಠ)ノ")
                 logging.info("G-Muted {}".format(str(user_id)))
+                log_msg = f"Gmuted [{firstname}](tg://user?id={user_id})\nID: {user_id}\nGroup Chat: {event.chat_id}"
+                if Config.PRIVATE_GROUP_BOT_API_ID is not None:
+                    borg.send_message(
+                          Config.PRIVATE_GROUP_BOT_API_ID,
+                          logmsg
+                      )
         except Exception as e:
             logging.error(str(e))
             await event.edit("Error: "+str(e))
@@ -84,6 +90,12 @@ async def un_gmute_user(event):
         muted.delete_one({'user_id':user_id})
         await event.edit(f"Alright,I am giving [{firstname}](tg://user?id={user_id}) a second chance __globally__")
         logging.info("Un-Gmuted {}".format(str(user_id)))
+        log_msg = f"Gmuted [{firstname}](tg://user?id={user_id})\nID: {user_id}\nGroup Chat: {event.chat_id}"
+        if Config.PRIVATE_GROUP_BOT_API_ID is not None:
+            borg.send_message(
+                  Config.PRIVATE_GROUP_BOT_API_ID,
+                  logmsg
+            )
     except Exception as e:
         logging.error(str(e))
         await event.edit("Error: "+str(e))
