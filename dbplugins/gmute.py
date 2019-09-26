@@ -59,7 +59,7 @@ async def gmute_user(event):
                 logging.info("G-Muted {}".format(str(user_id)))
                 log_msg = f"Gmuted [{firstname}](tg://user?id={user_id})\nID: {user_id}\nGroup Chat: {event.chat_id}"
                 if Config.PRIVATE_GROUP_BOT_API_ID is not None:
-                    borg.send_message(
+                    await borg.send_message(
                           Config.PRIVATE_GROUP_BOT_API_ID,
                           log_msg
                       )
@@ -92,7 +92,7 @@ async def un_gmute_user(event):
         logging.info("Un-Gmuted {}".format(str(user_id)))
         log_msg = f"Gmuted [{firstname}](tg://user?id={user_id})\nID: {user_id}\nGroup Chat: {event.chat_id}"
         if Config.PRIVATE_GROUP_BOT_API_ID is not None:
-            borg.send_message(
+            await borg.send_message(
                   Config.PRIVATE_GROUP_BOT_API_ID,
                   log_msg
             )
