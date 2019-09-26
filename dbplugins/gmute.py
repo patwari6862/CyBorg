@@ -61,7 +61,7 @@ async def gmute_user(event):
                 if Config.PRIVATE_GROUP_BOT_API_ID is not None:
                     borg.send_message(
                           Config.PRIVATE_GROUP_BOT_API_ID,
-                          logmsg
+                          log_msg
                       )
         except Exception as e:
             logging.error(str(e))
@@ -94,7 +94,7 @@ async def un_gmute_user(event):
         if Config.PRIVATE_GROUP_BOT_API_ID is not None:
             borg.send_message(
                   Config.PRIVATE_GROUP_BOT_API_ID,
-                  logmsg
+                  log_msg
             )
     except Exception as e:
         logging.error(str(e))
